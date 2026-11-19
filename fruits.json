@@ -1,18 +1,136 @@
 {
   "whatsapp": [
-    { "label": "+225 09 55 16 28", "short": "+225", "number": "22509551628" },
-    { "label": "+226 64 26 46 25", "short": "+226", "number": "22664264625" }
+    {
+      "label": "+225 09 55 16 28",
+      "short": "+225",
+      "number": "22509551628"
+    },
+    {
+      "label": "+226 64 26 46 25",
+      "short": "+226",
+      "number": "22664264625"
+    }
   ],
   "fruits": [
-    { "id": 1, "name": "Gas (Hellfire)", "type": "Beast", "beli": 5200000, "robux": 3200, "fcfa": 19500, "rarity": "Mythical", "image": "https://static.wikia.nocookie.net/blox-fruits/images/1/1a/Dragon_Fruit.png", "desc": "Fruit Gas de type Beast avec transformation et aura Hellfire toxique.", "ability": "Nuage de poison infernal, vol toxique et transformation Beast." },
-    { "id": 2, "name": "Kitsune", "type": "Beast", "beli": 8000000, "robux": 4000, "fcfa": 24000, "rarity": "Mythical", "image": "https://static.wikia.nocookie.net/blox-fruits/images/b/b2/Kitsune_Fruit.png", "desc": "Le fruit le plus rapide et puissant pour le PvP.", "ability": "Transformation Kitsune et flammes bleues." },
-    { "id": 3, "name": "Dragon", "type": "Beast", "beli": 15000000, "robux": 5000, "fcfa": 30000, "rarity": "Mythical", "image": "https://static.wikia.nocookie.net/blox-fruits/images/1/1a/Dragon_Fruit.png", "desc": "Transformation en dragon destructeur.", "ability": "Boules de feu géantes et souffle ardent." },
-    { "id": 4, "name": "Magnet", "type": "Natural", "beli": 3200000, "robux": 2500, "fcfa": 15000, "rarity": "Mythical", "image": "https://static.wikia.nocookie.net/blox-fruits/images/e/e0/Portal_Fruit.png", "desc": "Attire et repousse les ennemis et objets en métal.", "ability": "Champ magnétique et répulsion." },
-    { "id": 5, "name": "Leopard", "type": "Beast", "beli": 5000000, "robux": 3000, "fcfa": 18000, "rarity": "Mythical", "image": "https://static.wikia.nocookie.net/blox-fruits/images/5/5f/Leopard_Fruit.png", "desc": "Combos ultra-rapides et agilité extrême.", "ability": "Transformation Léopard humanoïde." },
-    { "id": 6, "name": "Dough", "type": "Natural", "beli": 2800000, "robux": 2400, "fcfa": 14500, "rarity": "Mythical", "image": "https://static.wikia.nocookie.net/blox-fruits/images/2/22/Dough_Fruit.png", "desc": "Redoutable une fois éveillé (Awakened).", "ability": "Stun puissant et poings de pâte." },
-    { "id": 7, "name": "Portal", "type": "Natural", "beli": 1900000, "robux": 2000, "fcfa": 12000, "rarity": "Legendary", "image": "https://static.wikia.nocookie.net/blox-fruits/images/7/77/Portal_Fruit.png", "desc": "Téléportation instantanée sur toute la carte.", "ability": "Portails dimensionnels." },
-    { "id": 8, "name": "Buddha", "type": "Beast", "beli": 1200000, "robux": 1650, "fcfa": 10000, "rarity": "Rare", "image": "https://static.wikia.nocookie.net/blox-fruits/images/f/fc/Buddha_Fruit.png", "desc": "Le meilleur fruit pour fermer des niveaux.", "ability": "Taille géante et portée décuplée." },
-    { "id": 9, "name": "Magma", "type": "Logia", "beli": 850000, "robux": 1300, "fcfa": 8000, "rarity": "Epic", "image": "https://static.wikia.nocookie.net/blox-fruits/images/9/93/Magma_Fruit.png", "desc": "Dégâts bruts les plus élevés du jeu.", "ability": "Flaques de magma et poings incandescents." },
-    { "id": 10, "name": "Light", "type": "Logia", "beli": 650000, "robux": 1100, "fcfa": 6500, "rarity": "Rare", "image": "https://static.wikia.nocookie.net/blox-fruits/images/6/6b/Light_Fruit.png", "desc": "Vol le plus rapide pour la Première Mer.", "ability": "Épée de lumière et rayons." }
+    {
+      "id": 1,
+      "name": "Gas (Hellfire)",
+      "type": "Beast",
+      "beli": 5200000,
+      "robux": 3200,
+      "fcfa": 19500,
+      "rarity": "Mythical",
+      "image": "images/gas.png",
+      "desc": "Fruit Gas de type Beast avec transformation et aura Hellfire toxique.",
+      "ability": "Nuage de poison infernal, vol toxique et transformation Beast."
+    },
+    {
+      "id": 2,
+      "name": "Kitsune",
+      "type": "Beast",
+      "beli": 8000000,
+      "robux": 4000,
+      "fcfa": 24000,
+      "rarity": "Mythical",
+      "image": "images/kitsune.png",
+      "desc": "Le fruit le plus rapide et puissant pour le PvP.",
+      "ability": "Transformation Kitsune et flammes bleues."
+    },
+    {
+      "id": 3,
+      "name": "Dragon",
+      "type": "Beast",
+      "beli": 15000000,
+      "robux": 5000,
+      "fcfa": 30000,
+      "rarity": "Mythical",
+      "image": "images/dragon.png",
+      "desc": "Transformation en dragon destructeur.",
+      "ability": "Boules de feu géantes et souffle ardent."
+    },
+    {
+      "id": 4,
+      "name": "Magnet",
+      "type": "Natural",
+      "beli": 3200000,
+      "robux": 2500,
+      "fcfa": 15000,
+      "rarity": "Mythical",
+      "image": "images/magnet.png",
+      "desc": "Attire et repousse les ennemis et objets en métal.",
+      "ability": "Champ magnétique et répulsion."
+    },
+    {
+      "id": 5,
+      "name": "Leopard",
+      "type": "Beast",
+      "beli": 5000000,
+      "robux": 3000,
+      "fcfa": 18000,
+      "rarity": "Mythical",
+      "image": "https://static.wikia.nocookie.net/blox-fruits/images/5/5f/Leopard_Fruit.png",
+      "desc": "Combos ultra-rapides et agilité extrême.",
+      "ability": "Transformation Léopard humanoïde."
+    },
+    {
+      "id": 6,
+      "name": "Dough",
+      "type": "Natural",
+      "beli": 2800000,
+      "robux": 2400,
+      "fcfa": 14500,
+      "rarity": "Mythical",
+      "image": "images/dough.png",
+      "desc": "Redoutable une fois éveillé (Awakened).",
+      "ability": "Stun puissant et poings de pâte."
+    },
+    {
+      "id": 7,
+      "name": "Portal",
+      "type": "Natural",
+      "beli": 1900000,
+      "robux": 2000,
+      "fcfa": 12000,
+      "rarity": "Legendary",
+      "image": "images/portal.png",
+      "desc": "Téléportation instantanée sur toute la carte.",
+      "ability": "Portails dimensionnels."
+    },
+    {
+      "id": 8,
+      "name": "Buddha",
+      "type": "Beast",
+      "beli": 1200000,
+      "robux": 1650,
+      "fcfa": 10000,
+      "rarity": "Rare",
+      "image": "images/buddha.png",
+      "desc": "Le meilleur fruit pour fermer des niveaux.",
+      "ability": "Taille géante et portée décuplée."
+    },
+    {
+      "id": 9,
+      "name": "Magma",
+      "type": "Logia",
+      "beli": 850000,
+      "robux": 1300,
+      "fcfa": 8000,
+      "rarity": "Epic",
+      "image": "images/magma.png",
+      "desc": "Dégâts bruts les plus élevés du jeu.",
+      "ability": "Flaques de magma et poings incandescents."
+    },
+    {
+      "id": 10,
+      "name": "Light",
+      "type": "Logia",
+      "beli": 650000,
+      "robux": 1100,
+      "fcfa": 6500,
+      "rarity": "Rare",
+      "image": "images/light.png",
+      "desc": "Vol le plus rapide pour la Première Mer.",
+      "ability": "Épée de lumière et rayons."
+    }
   ]
 }
