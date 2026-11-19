@@ -51,6 +51,7 @@ h2{font-family:var(--display);font-weight:400;font-size:1.8rem;margin-bottom:14p
 .search{flex:1 1 220px;background:var(--panel);border:2px solid #ffffff1f;border-radius:12px;color:var(--ink);padding:11px 14px;font:700 1rem var(--body)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{font:800 .9rem var(--body);cursor:pointer;border-radius:999px;padding:8px 14px;background:var(--panel);color:var(--mute);border:2px solid #ffffff1f}
+.ver{font:800 .9rem var(--body);cursor:pointer;border-radius:12px;padding:8px 16px;background:var(--panel);color:var(--mute);border:2px solid #ffffff1f}.ver[aria-pressed=true]{background:#19d3da;color:#021a1d;border-color:#19d3da}.vt{display:inline-block;font:800 .7rem var(--body);padding:2px 8px;border-radius:999px;background:#19d3da22;color:#19d3da;margin-left:6px}
 .chip[aria-pressed=true]{background:var(--yellow);color:#021a1d;border-color:var(--yellow)}
 .cur{display:flex;gap:6px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;padding-bottom:40px}
@@ -183,6 +184,7 @@ a.add,a.btn{text-decoration:none;text-align:center;display:block}
     <div class="cats" id="cats" role="group" aria-label="Catégories"></div>
     <div class="bar">
       <input class="search" id="q" type="search" placeholder="Chercher un fruit (Kitsune, Dragon...)" aria-label="Chercher un fruit">
+      <div class="chips" id="vers" role="group" aria-label="Version du fruit"></div>
       <div class="chips" id="chips" role="group" aria-label="Filtrer par rareté"></div>
       <select class="sort" id="sort" aria-label="Trier"><option value="def">Populaires</option><option value="asc">Prix croissant</option><option value="desc">Prix décroissant</option><option value="az">Nom A-Z</option></select>
     </div>
@@ -248,48 +250,48 @@ const ELDORADO_SHOP = "https://www.eldorado.gg/blox-fruits-shop/i/202-2-0";
 const ELDORADO_LINKS = {};          // lien exact d'une offre Eldorado par article, ex : { kitsune: "https://www.eldorado.gg/..." }
 /* ===================== */
 const FRUITS = [
- {u:"0.30–0.50",cat:"fruit",id:"rocket",n:"Rocket",r:"Commun",c:"#68cb4d",c2:"#28541c",d:"Fruit de rareté commun dans Blox Fruits."},
- {u:"0.30–0.50",cat:"fruit",id:"spin",n:"Spin",r:"Commun",c:"#4d86cb",c2:"#1c3554",d:"Fruit de rareté commun dans Blox Fruits."},
- {u:"0.50–1",cat:"fruit",id:"blade",n:"Blade",r:"Commun",c:"#924dcb",c2:"#3a1c54",d:"Fruit de rareté commun dans Blox Fruits."},
- {u:"0.80–1.30",cat:"fruit",id:"spring",n:"Spring",r:"Commun",c:"#698bd3",c2:"#1c2d54",d:"Fruit de rareté commun dans Blox Fruits."},
- {u:"1.20–1.50",cat:"fruit",id:"bomb",n:"Bomb",r:"Commun",c:"#cb564d",c2:"#54201c",d:"Fruit de rareté commun dans Blox Fruits."},
- {u:"1.30–1.90",cat:"fruit",id:"smoke",n:"Smoke",r:"Commun",c:"#7c8ed9",c2:"#1c2654",d:"Fruit de rareté commun dans Blox Fruits."},
- {u:"2–3",cat:"fruit",id:"spike",n:"Spike",r:"Commun",c:"#6277d1",c2:"#1c2654",d:"Fruit de rareté commun dans Blox Fruits."},
- {u:"3–5",cat:"fruit",id:"flame",n:"Flame",r:"Peu commun",c:"#e3a634",c2:"#62440d",d:"Fruit de rareté peu commun dans Blox Fruits."},
- {u:"4–7",cat:"fruit",id:"ice",n:"Ice",r:"Peu commun",c:"#57b6de",c2:"#12475d",d:"Fruit de rareté peu commun dans Blox Fruits."},
- {u:"5–7",cat:"fruit",id:"sand",n:"Sand",r:"Peu commun",c:"#ce8949",c2:"#583617",d:"Fruit de rareté peu commun dans Blox Fruits."},
- {u:"5–7",cat:"fruit",id:"dark",n:"Dark",r:"Peu commun",c:"#c032e6",c2:"#510c64",d:"Fruit de rareté peu commun dans Blox Fruits."},
- {u:"5–7",cat:"fruit",id:"eagle",n:"Eagle",r:"Peu commun",c:"#6c4dcb",c2:"#2a1c54",d:"Fruit de rareté peu commun dans Blox Fruits."},
- {u:"5.60–7",cat:"fruit",id:"diamond",n:"Diamond",r:"Peu commun",c:"#429de3",c2:"#0e3d62",d:"Fruit de rareté peu commun dans Blox Fruits."},
- {u:"6–8",cat:"fruit",id:"light",n:"Light",r:"Rare",c:"#eda42b",c2:"#674308",d:"Fruit de rareté rare dans Blox Fruits."},
- {u:"6.50–9",cat:"fruit",id:"rubber",n:"Rubber",r:"Rare",c:"#cb4d8c",c2:"#541c37",d:"Fruit de rareté rare dans Blox Fruits."},
- {u:"7–10",cat:"fruit",id:"ghost",n:"Ghost",r:"Rare",c:"#749bd6",c2:"#1c3254",d:"Fruit de rareté rare dans Blox Fruits."},
- {u:"7–10",cat:"fruit",id:"magma",n:"Magma",r:"Rare",c:"#ea892e",c2:"#66360a",d:"Fruit de rareté rare dans Blox Fruits."},
- {u:"8–11",cat:"fruit",id:"quake",n:"Quake",r:"Légendaire",c:"#5b73cf",c2:"#192556",d:"Fruit de rareté légendaire dans Blox Fruits."},
- {u:"9–12",cat:"fruit",id:"buddha",n:"Buddha",r:"Légendaire",c:"#ebb037",c2:"#664809",d:"Transformation géante et défense solide."},
+ {u:"0.35",cat:"fruit",id:"rocket",n:"Rocket",r:"Commun",c:"#68cb4d",c2:"#28541c",d:"Fruit de rareté commun dans Blox Fruits."},
+ {u:"0.5",cat:"fruit",id:"spin",n:"Spin",r:"Commun",c:"#4d86cb",c2:"#1c3554",d:"Fruit de rareté commun dans Blox Fruits."},
+ {u:"0.78",cat:"fruit",id:"blade",n:"Blade",r:"Commun",c:"#924dcb",c2:"#3a1c54",d:"Fruit de rareté commun dans Blox Fruits."},
+ {u:"1.23",cat:"fruit",id:"spring",n:"Spring",r:"Commun",c:"#698bd3",c2:"#1c2d54",d:"Fruit de rareté commun dans Blox Fruits."},
+ {u:"1.5",cat:"fruit",id:"bomb",n:"Bomb",r:"Commun",c:"#cb564d",c2:"#54201c",d:"Fruit de rareté commun dans Blox Fruits."},
+ {u:"1.57",cat:"fruit",id:"smoke",n:"Smoke",r:"Commun",c:"#7c8ed9",c2:"#1c2654",d:"Fruit de rareté commun dans Blox Fruits."},
+ {u:"2.52",cat:"fruit",id:"spike",n:"Spike",r:"Commun",c:"#6277d1",c2:"#1c2654",d:"Fruit de rareté commun dans Blox Fruits."},
+ {u:"3.36",cat:"fruit",id:"flame",n:"Flame",r:"Peu commun",c:"#e3a634",c2:"#62440d",d:"Fruit de rareté peu commun dans Blox Fruits."},
+ {u:"4.98",cat:"fruit",id:"ice",n:"Ice",r:"Peu commun",c:"#57b6de",c2:"#12475d",d:"Fruit de rareté peu commun dans Blox Fruits."},
+ {u:"5.48",cat:"fruit",id:"sand",n:"Sand",r:"Peu commun",c:"#ce8949",c2:"#583617",d:"Fruit de rareté peu commun dans Blox Fruits."},
+ {u:"6.29",cat:"fruit",id:"dark",n:"Dark",r:"Peu commun",c:"#c032e6",c2:"#510c64",d:"Fruit de rareté peu commun dans Blox Fruits."},
+ {u:"6.18",cat:"fruit",id:"eagle",n:"Eagle",r:"Peu commun",c:"#6c4dcb",c2:"#2a1c54",d:"Fruit de rareté peu commun dans Blox Fruits."},
+ {u:"6.38",cat:"fruit",id:"diamond",n:"Diamond",r:"Peu commun",c:"#429de3",c2:"#0e3d62",d:"Fruit de rareté peu commun dans Blox Fruits."},
+ {u:"7.5",cat:"fruit",id:"light",n:"Light",r:"Rare",c:"#eda42b",c2:"#674308",d:"Fruit de rareté rare dans Blox Fruits."},
+ {u:"7.55",cat:"fruit",id:"rubber",n:"Rubber",r:"Rare",c:"#cb4d8c",c2:"#541c37",d:"Fruit de rareté rare dans Blox Fruits."},
+ {p:0.25,u:"7–10",cat:"fruit",id:"ghost",n:"Ghost",r:"Rare",c:"#749bd6",c2:"#1c3254",d:"Fruit de rareté rare dans Blox Fruits."},
+ {p:0.33,u:"8.6",cat:"fruit",id:"magma",n:"Magma",r:"Rare",c:"#ea892e",c2:"#66360a",d:"Fruit de rareté rare dans Blox Fruits."},
+ {p:0.41,u:"9.44",cat:"fruit",id:"quake",n:"Quake",r:"Légendaire",c:"#5b73cf",c2:"#192556",d:"Fruit de rareté légendaire dans Blox Fruits."},
+ {u:"9.98",cat:"fruit",id:"buddha",n:"Buddha",r:"Légendaire",c:"#ebb037",c2:"#664809",d:"Transformation géante et défense solide."},
  {u:"9–12",cat:"fruit",id:"love",n:"Love",r:"Légendaire",c:"#ec589d",c2:"#650b35",d:"Fruit de rareté légendaire dans Blox Fruits."},
- {u:"9–13",cat:"fruit",id:"creation",n:"Creation",r:"Légendaire",c:"#cbbf4d",c2:"#544e1c",d:"Fruit de rareté légendaire dans Blox Fruits."},
- {u:"10–14",cat:"fruit",id:"spider",n:"Spider",r:"Légendaire",c:"#dc88ad",c2:"#541c34",d:"Fruit de rareté légendaire dans Blox Fruits."},
- {u:"10–14",cat:"fruit",id:"sound",n:"Sound",r:"Légendaire",c:"#9045d2",c2:"#3a155a",d:"Fruit de rareté légendaire dans Blox Fruits."},
- {u:"10–14",cat:"fruit",id:"phoenix",n:"Phoenix",r:"Légendaire",c:"#598dce",c2:"#1c3554",d:"Fruit de rareté légendaire dans Blox Fruits."},
- {u:"11–15",cat:"fruit",id:"portal",n:"Portal",r:"Légendaire",c:"#56b7da",c2:"#14495c",d:"Téléportation sur la carte."},
- {u:"12–16",cat:"fruit",id:"lightning",n:"Lightning",r:"Légendaire",c:"#23a4f4",c2:"#05436b",d:"Fruit de rareté légendaire dans Blox Fruits."},
+ {p:0.28,u:"9–13",cat:"fruit",id:"creation",n:"Creation",r:"Légendaire",c:"#cbbf4d",c2:"#544e1c",d:"Fruit de rareté légendaire dans Blox Fruits."},
+ {p:0.35,u:"10–14",cat:"fruit",id:"spider",n:"Spider",r:"Légendaire",c:"#dc88ad",c2:"#541c34",d:"Fruit de rareté légendaire dans Blox Fruits."},
+ {p:0.28,u:"10–14",cat:"fruit",id:"sound",n:"Sound",r:"Légendaire",c:"#9045d2",c2:"#3a155a",d:"Fruit de rareté légendaire dans Blox Fruits."},
+ {p:0.33,u:"10–14",cat:"fruit",id:"phoenix",n:"Phoenix",r:"Légendaire",c:"#598dce",c2:"#1c3554",d:"Fruit de rareté légendaire dans Blox Fruits."},
+ {p:0.4,u:"11–15",cat:"fruit",id:"portal",n:"Portal",r:"Légendaire",c:"#56b7da",c2:"#14495c",d:"Téléportation sur la carte."},
+ {p:0.35,u:"12–16",cat:"fruit",id:"lightning",n:"Lightning",r:"Légendaire",c:"#23a4f4",c2:"#05436b",d:"Fruit de rareté légendaire dans Blox Fruits."},
  {u:"12–17",cat:"fruit",id:"pain",n:"Pain",r:"Légendaire",c:"#dc8e88",c2:"#541f1b",d:"Fruit de rareté légendaire dans Blox Fruits."},
  {u:"12–17",cat:"fruit",id:"blizzard",n:"Blizzard",r:"Légendaire",c:"#88c4dc",c2:"#1c4354",d:"Fruit de rareté légendaire dans Blox Fruits."},
  {u:"12–17",cat:"fruit",id:"gravity",n:"Gravity",r:"Mythique",c:"#834dcb",c2:"#341c54",d:"Fruit de rareté mythique dans Blox Fruits."},
- {u:"12–17",cat:"fruit",id:"mammoth",n:"Mammoth",r:"Mythique",c:"#a04dcb",c2:"#411c54",d:"Fruit de rareté mythique dans Blox Fruits."},
- {u:"12–17",cat:"fruit",id:"trex",n:"T-Rex",r:"Mythique",c:"#cb764d",c2:"#542e1c",d:"Fruit de rareté mythique dans Blox Fruits."},
+ {p:0.29,u:"12–17",cat:"fruit",id:"mammoth",n:"Mammoth",r:"Mythique",c:"#a04dcb",c2:"#411c54",d:"Fruit de rareté mythique dans Blox Fruits."},
+ {p:0.3,u:"12–17",cat:"fruit",id:"trex",n:"T-Rex",r:"Mythique",c:"#cb764d",c2:"#542e1c",d:"Fruit de rareté mythique dans Blox Fruits."},
  {u:"13–17",cat:"fruit",id:"dough",n:"Dough",r:"Mythique",c:"#d77599",c2:"#541c31",d:"Fruit mythique très recherché."},
  {u:"13–18",cat:"fruit",id:"shadow",n:"Shadow",r:"Mythique",c:"#b34acd",c2:"#4b1858",d:"Fruit de rareté mythique dans Blox Fruits."},
- {u:"13–18",cat:"fruit",id:"venom",n:"Venom",r:"Mythique",c:"#cd4a96",c2:"#58183d",d:"Fruit de rareté mythique dans Blox Fruits."},
- {u:"14–18",cat:"fruit",id:"gas",n:"Gas",r:"Mythique",c:"#4d5acb",c2:"#1c2254",d:"Fruit de rareté mythique dans Blox Fruits."},
+ {p:1.39,u:"13–18",cat:"fruit",id:"venom",n:"Venom",r:"Mythique",c:"#cd4a96",c2:"#58183d",d:"Fruit de rareté mythique dans Blox Fruits."},
+ {p:1,u:"15.24",cat:"fruit",id:"gas",n:"Gas",r:"Mythique",c:"#4d5acb",c2:"#1c2254",d:"Fruit de rareté mythique dans Blox Fruits."},
  {u:"14–18",cat:"fruit",id:"spirit",n:"Spirit",r:"Mythique",c:"#4d91cb",c2:"#1c3a54",d:"Fruit de rareté mythique dans Blox Fruits."},
- {u:"16–19",cat:"fruit",id:"tiger",n:"Tiger",r:"Mythique",c:"#cb784d",c2:"#542f1c",d:"Fruit de rareté mythique dans Blox Fruits."},
- {u:"15–22",cat:"fruit",id:"yeti",n:"Yeti",r:"Mythique",c:"#6287d1",c2:"#1c2e54",d:"Fruit de type Bête, permet de se déplacer sur l'eau."},
+ {p:0.75,u:"16–19",cat:"fruit",id:"tiger",n:"Tiger",r:"Mythique",c:"#cb784d",c2:"#542f1c",d:"Fruit de rareté mythique dans Blox Fruits."},
+ {p:1.05,u:"15–22",cat:"fruit",id:"yeti",n:"Yeti",r:"Mythique",c:"#6287d1",c2:"#1c2e54",d:"Fruit de type Bête, permet de se déplacer sur l'eau."},
  {u:null,cat:"fruit",id:"magnet",n:"Magnet",r:"Mythique",c:"#4d53cb",c2:"#1c1e54",d:"Nouveau fruit de la mise à jour 30."},
- {u:"21–30",cat:"fruit",id:"kitsune",n:"Kitsune",r:"Mythique",c:"#4683d1",c2:"#163359",d:"Fruit de type Bête, permet de se déplacer sur l'eau."},
- {u:"21–30",cat:"fruit",id:"control",n:"Control",r:"Mythique",c:"#47a0de",c2:"#103e5f",d:"Fruit de rareté mythique dans Blox Fruits."},
- {u:"25–40",cat:"fruit",id:"dragon",n:"Dragon",r:"Mythique",c:"#a7cb4d",c2:"#44541c",d:"Transformation en dragon."},
+ {p:3.39,u:"21–30",cat:"fruit",id:"kitsune",n:"Kitsune",r:"Mythique",c:"#4683d1",c2:"#163359",d:"Fruit de type Bête, permet de se déplacer sur l'eau."},
+ {p:0.75,u:"21–30",cat:"fruit",id:"control",n:"Control",r:"Mythique",c:"#47a0de",c2:"#103e5f",d:"Fruit de rareté mythique dans Blox Fruits."},
+ {p:14.4,u:"25–40",cat:"fruit",id:"dragon",n:"Dragon",r:"Mythique",c:"#a7cb4d",c2:"#44541c",d:"Transformation en dragon."},
  {u:null,cat:"variant",id:"empyrean",n:"Empyrean",r:"Mutation",c:"#e1825b",c2:"#5f2711",d:"Mutation du fruit Kitsune, exclusive aux événements."},
  {u:null,cat:"variant",id:"fiend",n:"Fiend",r:"Mutation",c:"#cb5f4d",c2:"#54241c",d:"Mutation du fruit Yeti, exclusive aux événements."},
  {u:null,cat:"variant",id:"hellfire",n:"Hellfire",r:"Mutation",c:"#cb974d",c2:"#543c1c",d:"Mutation du fruit Gas, exclusive aux événements."},
@@ -444,13 +446,19 @@ const CATS = [["fruit","Fruits"],["variant","Variantes et mutations"],["gamepass
 const INFOS = {Mythique:"Fruit parmi les plus recherchés du jeu",Légendaire:"Très bon fruit pour le PvP et le farm",Rare:"Bon rapport qualité prix","Peu commun":"Idéal pour progresser",Commun:"Parfait pour débuter",Mutation:"Version spéciale, exclusive aux événements",Variante:"Version limitée de fruit, très recherchée","Objet rare":"Objet limité de collection",Gamepass:"Avantage permanent sur ton compte"};
 const $ = s => document.querySelector(s);
 const fmt = n => Math.round(n).toLocaleString("fr-FR");
-let cat = "fruit", filtre = "Toutes", cart = {};
-const hi = f => { if(!f.u) return null; const m = f.u.replace("+","").split("–").map(Number); return m[m.length-1]; };
-const sell = f => { const h = hi(f); return h===null ? null : Math.ceil(h*USD_XOF*(1+MARGIN)/100)*100; };
+let cat = "fruit", filtre = "Toutes", cart = {}, ver = "perm";
+const VN = {perm:"Permanent", phys:"Physique"};
+const split = k => k.endsWith("~p") ? [k.slice(0,-2),"phys"] : [k,"perm"];
+const key = (id,v) => v==="phys" ? id+"~p" : id;
+const fr = k => FRUITS.find(x=>x.id===split(k)[0]);
+const hi = (f,v) => { v = v || (f.cat==="fruit" ? ver : "perm"); if(v==="phys") return f.p ?? null; if(!f.u) return null; const m = f.u.replace("+","").split("–").map(Number); return m[m.length-1]; };
+const sell = (f,v) => { const h = hi(f,v); return h===null ? null : Math.ceil(h*USD_XOF*(1+MARGIN)/100)*100; };
 const priceHtml = f => sell(f)===null ? `<b>Prix sur demande</b><small>Écris-nous pour le tarif</small>` : `<b>${fmt(sell(f))} FCFA</b>`;
 const waAsk = n => "https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent("Salut ! Je voudrais le prix de : "+n+" (Blox Market).");
-const actionHtml = f => sell(f)===null ? `<a class="add" target="_blank" rel="noopener" href="${waAsk(f.n)}">Demander le prix</a>` : `<button class="add" type="button" data-add="${f.id}">Ajouter au panier</button>`;
+const vlab = f => f.cat==="fruit" ? ` (${VN[ver]})` : "";
+const actionHtml = f => sell(f)===null ? `<a class="add" target="_blank" rel="noopener" href="${waAsk(f.n+vlab(f))}">Demander le prix</a>` : `<button class="add" type="button" data-add="${key(f.id,f.cat==="fruit"?ver:"perm")}">Ajouter au panier</button>`;
 const rarites = () => ["Toutes", ...ORDRE.filter(r => FRUITS.some(f => f.cat===cat && f.r===r))];
+function renderVers(){ const b=$("#vers"); b.style.display = cat==="fruit" ? "flex" : "none"; b.innerHTML = Object.entries(VN).map(([k,l])=>`<button class="ver" type="button" data-ver="${k}" aria-pressed="${k===ver}">${l}</button>`).join(""); }
 function renderChips(){
   $("#cats").innerHTML = CATS.map(([k,l])=>`<button class="cat" type="button" data-cat="${k}" aria-pressed="${k===cat}">${l} (${FRUITS.filter(f=>f.cat===k).length})</button>`).join("");
   const R = rarites(); $("#chips").style.display = R.length>2 ? "flex" : "none";
@@ -467,7 +475,7 @@ function renderGrid(){
     <article class="card" style="--c:${f.c};--c2:${f.c2}">
       <span class="rar">${f.r}</span>
       <div class="fruit" data-open="${f.id}"><img src="${IMG[f.id]}" alt="${f.n}" width="110" height="110"></div>
-      <h3 data-open="${f.id}">${f.n}</h3>
+      <h3 data-open="${f.id}">${f.n}${f.cat==="fruit"?`<span class="vt">${VN[ver]}</span>`:""}</h3>
       <p>${f.d}</p>
       <div class="price">${priceHtml(f)}</div>
       <button class="more" type="button" data-open="${f.id}">Voir le détail</button>
@@ -479,24 +487,24 @@ function openModal(id){
   $("#mbox").style.setProperty("--c", f.c);
   $("#mbox").innerHTML = `<button class="x" type="button" data-close aria-label="Fermer">×</button>
    <img src="${IMG[f.id]}" alt="${f.n}">
-   <div><span class="tag">${f.r}</span><h3>${f.n}</h3><p style="color:var(--mute)">${f.d}</p>
+   <div><span class="tag">${f.r}</span><h3>${f.n}${f.cat==="fruit"?`<span class="vt">${VN[ver]}</span>`:""}</h3><p style="color:var(--mute)">${f.d}</p>
    <ul><li>${INFOS[f.r]}</li><li>Livraison en jeu après paiement</li><li>Prix confirmé avant ton paiement</li></ul>
    <div class="price" style="margin-bottom:12px">${priceHtml(f)}</div>
-   ${sell(f)===null ? `<a class="btn main" target="_blank" rel="noopener" href="${waAsk(f.n)}">Demander le prix</a>` : `<button class="btn main" type="button" data-add="${f.id}" style="width:100%">Ajouter au panier</button>`}</div>`;
+   ${sell(f)===null ? `<a class="btn main" target="_blank" rel="noopener" href="${waAsk(f.n+vlab(f))}">Demander le prix</a>` : `<button class="btn main" type="button" data-add="${key(f.id,f.cat==="fruit"?ver:"perm")}" style="width:100%">Ajouter au panier</button>`}</div>`;
   $("#modal").classList.add("open");
 }
 function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("show"),1800)}
 function toggle(open){ $("#drawer").classList.toggle("open",open); $("#veil").classList.toggle("open",open); $("#drawer").setAttribute("aria-hidden",String(!open)); }
-const total = () => Object.keys(cart).reduce((a,i)=>a+cart[i]*sell(FRUITS.find(f=>f.id===i)),0);
+const total = () => Object.keys(cart).reduce((a,i)=>a+cart[i]*sell(fr(i),split(i)[1]),0);
 function renderCart(){
   const ids = Object.keys(cart);
   $("#count").textContent = ids.reduce((a,i)=>a+cart[i],0);
   $("#totalF").textContent = fmt(total())+" FCFA";
   $("#items").innerHTML = ids.length ? ids.map(i=>{
-    const f = FRUITS.find(x=>x.id===i);
+    const f = fr(i), v = split(i)[1], nm = f.n + (f.cat==="fruit" ? " ("+VN[v]+")" : "");
     return `<div class="it" style="--c:${f.c};--c2:${f.c2}"><img class="th" src="${IMG[f.id]}" alt="">
-      <div><b>${f.n}</b><small>${fmt(sell(f))} FCFA</small></div>
-      <div class="qty"><button type="button" data-dec="${i}" aria-label="Retirer un ${f.n}">−</button><b>${cart[i]}</b><button type="button" data-inc="${i}" aria-label="Ajouter un ${f.n}">+</button></div></div>`;
+      <div><b>${nm}</b><small>${fmt(sell(f,v))} FCFA</small></div>
+      <div class="qty"><button type="button" data-dec="${i}" aria-label="Retirer un ${nm}">−</button><b>${cart[i]}</b><button type="button" data-inc="${i}" aria-label="Ajouter un ${nm}">+</button></div></div>`;
   }).join("") : `<p class="note">Ton panier est vide. Ajoute un article depuis le catalogue.</p>`;
   const ok = ids.length && $("#pseudo").value.trim() && (ORDER_MODE==="whatsapp" || $("#contact").value.trim());
   $("#send").setAttribute("aria-disabled", ok ? "false" : "true");
@@ -504,8 +512,8 @@ function renderCart(){
 }
 function orderData(){
   const ids = Object.keys(cart);
-  const lines = ids.map(i=>{const f=FRUITS.find(x=>x.id===i);return `${cart[i]} x ${f.n} (${fmt(sell(f)*cart[i])} FCFA)`});
-  const src = ids.map(i=>{const f=FRUITS.find(x=>x.id===i);return `${f.n} : ${ELDORADO_LINKS[i]||ELDORADO_SHOP} (réf. marché $${f.u})`});
+  const lines = ids.map(i=>{const f=fr(i),v=split(i)[1];return `${cart[i]} x ${f.n}${f.cat==="fruit"?" ["+VN[v]+"]":""} (${fmt(sell(f,v)*cart[i])} FCFA)`});
+  const src = ids.map(i=>{const f=fr(i),v=split(i)[1];return `${f.n} ${VN[v]} : ${ELDORADO_LINKS[i]||ELDORADO_SHOP} (réf. marché $${hi(f,v)})`});
   return {pseudo:$("#pseudo").value.trim(), contact:$("#contact").value.trim(), articles:lines.join("\n"), total:fmt(total())+" FCFA", sources_eldorado:src.join("\n")};
 }
 async function send(){
@@ -527,9 +535,10 @@ document.addEventListener("click", e => {
   const o = e.target.closest("[data-open]"); if(o){ openModal(o.dataset.open); return; }
   if(e.target.id==="modal" || e.target.closest("[data-close]")) $("#modal").classList.remove("open");
   const t = e.target.closest("button"); if(!t) return;
-  if(t.dataset.cat){ cat=t.dataset.cat; filtre="Toutes"; renderChips(); renderGrid(); }
+  if(t.dataset.ver){ ver=t.dataset.ver; renderVers(); renderGrid(); }
+  if(t.dataset.cat){ cat=t.dataset.cat; filtre="Toutes"; renderVers(); renderChips(); renderGrid(); }
   if(t.dataset.r){ filtre=t.dataset.r; renderChips(); renderGrid(); }
-  if(t.dataset.add){ cart[t.dataset.add]=(cart[t.dataset.add]||0)+1; renderCart(); $("#modal").classList.remove("open"); toast(FRUITS.find(f=>f.id===t.dataset.add).n+" ajouté au panier"); }
+  if(t.dataset.add){ cart[t.dataset.add]=(cart[t.dataset.add]||0)+1; renderCart(); $("#modal").classList.remove("open"); toast(fr(t.dataset.add).n+" ajouté au panier"); }
   if(t.dataset.inc){ cart[t.dataset.inc]++; renderCart(); }
   if(t.dataset.dec){ if(--cart[t.dataset.dec]<=0) delete cart[t.dataset.dec]; renderCart(); }
 });
@@ -543,7 +552,7 @@ $("#waContact").href = "https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent("Sa
 $("#waFoot").href = $("#waContact").href;
 $("#nfruits").textContent = FRUITS.length;
 $("#h1").src = IMG.tiger; $("#h2").src = IMG.kitsune; $("#h3").src = IMG.dough;
-renderChips(); renderGrid(); renderCart();
+renderVers(); renderChips(); renderGrid(); renderCart();
 </script>
 </body>
 </html>
