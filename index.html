@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOX MARKET | Encyclopédie Blox Fruits</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bloxBlue: '#3b9dff',
+                        bloxDark: '#040a1f',
+                        bloxCard: 'rgba(12,28,72,0.55)',
+                        bloxBorder: 'rgba(90,160,255,0.24)',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body{background-color:#040a1f;background-image:radial-gradient(900px 500px at 0% 0%,rgba(40,110,255,.22),transparent 60%),radial-gradient(800px 500px at 100% 40%,rgba(0,170,255,.16),transparent 60%),radial-gradient(700px 400px at 20% 100%,rgba(70,90,255,.14),transparent 60%);background-attachment:fixed}
+        .neon-glow{box-shadow:0 0 22px rgba(40,130,255,.5),0 0 48px rgba(0,190,255,.25)}
+        .text-glow{text-shadow:0 0 14px rgba(60,160,255,.75)}
+        .bg-bloxCard{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background-image:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,0) 40%)}
+        #fruitsGrid>div{transition:transform .25s,box-shadow .25s,border-color .25s}
+        #fruitsGrid>div:hover{transform:translateY(-4px);border-color:rgba(80,170,255,.7);box-shadow:0 0 28px rgba(40,130,255,.3),0 0 60px rgba(0,190,255,.18)}
+        .btn-buy{background-image:linear-gradient(90deg,#7dff8a,#c4ff62);color:#042414;font-weight:700;box-shadow:0 0 18px rgba(150,255,110,.45)}
+        .btn-buy:hover{filter:brightness(1.08);box-shadow:0 0 28px rgba(160,255,120,.7)}
+        .btn-blue{background-image:linear-gradient(90deg,#2f7bff,#00c8ff);color:#fff;font-weight:700}
+        .btn-blue:hover{filter:brightness(1.12)}
+        .btn-red{background:#ff1f3d;color:#fff;font-weight:700}
+        .btn-red:hover{background:#ff4560}
+        @keyframes pulseGlow{0%,100%{box-shadow:0 0 0 0 rgba(150,255,110,.65)}50%{box-shadow:0 0 0 14px rgba(150,255,110,0)}}
+        .wa-float{animation:pulseGlow 2s infinite}
+        ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:#040a1f}::-webkit-scrollbar-thumb{background:#12306b;border-radius:4px}::-webkit-scrollbar-thumb:hover{background:#3b9dff}
+    </style>
+</head>
+<body class="bg-bloxDark text-slate-100 font-sans antialiased selection:bg-sky-400 selection:text-slate-900">
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-40 bg-bloxDark/90 backdrop-blur-md border-b border-bloxBorder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-500 to-cyan-400 flex items-center justify-center neon-glow group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-cube text-white text-xl"></i>
+                </div>
+                <span class="font-heading text-2xl tracking-wider font-900 text-white">BLOX <span class="text-sky-400 text-glow">MARKET</span></span>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-8 font-medium text-sm">
+                <a href="#accueil" class="hover:text-cyan-300 transition-colors">Accueil</a>
+                <a href="#catalogue" class="hover:text-cyan-300 transition-colors">Fruits</a>
+            </nav>
+
+            <div class="flex items-center space-x-3">
+                <div id="headerWa" class="hidden sm:flex items-center space-x-2"></div>
+                <button id="menuBtn" class="md:hidden text-slate-300 hover:text-white focus:outline-none text-2xl p-2" aria-label="Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="hidden md:hidden bg-bloxCard border-b border-bloxBorder px-4 pt-2 pb-6 space-y-3">
+            <a href="#accueil" class="block py-2 hover:text-cyan-300">Accueil</a>
+            <a href="#catalogue" class="block py-2 hover:text-cyan-300">Fruits</a>
+            <div class="pt-2 border-t border-bloxBorder space-y-2">
+                <p class="text-xs text-slate-400 font-semibold">Contacts WhatsApp :</p>
+                <div id="mobileWa" class="space-y-2"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section id="accueil" class="relative overflow-hidden py-16 lg:py-24 border-b border-bloxBorder">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-500/25 via-bloxDark to-bloxDark pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-sky-400/10 border border-sky-400/40 text-sky-300 text-xs font-semibold uppercase tracking-widest mb-6">Encyclopédie & Ventes Officielles</span>
+            <h1 class="font-heading text-4xl sm:text-6xl lg:text-7xl font-900 text-white tracking-tight mb-6">
+                LE GUIDE ULTIME DE <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300 text-glow">BLOX FRUITS</span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-slate-400 text-base sm:text-lg mb-8">
+                Consultez le catalogue complet des fruits avec leurs prix en <b class="text-cyan-300">Beli</b>, <b class="text-sky-300">Robux</b> et <b class="text-lime-300">FCFA</b> et commandez directement sur WhatsApp.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#catalogue" class="w-full sm:w-auto px-8 py-4 rounded-xl btn-blue transition-all neon-glow flex items-center justify-center space-x-2">
+                    <span>Voir les Fruits</span>
+                    <i class="fa-solid fa-arrow-down"></i>
+                </a>
+                <div id="heroWa" class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATALOGUE -->
+    <section id="catalogue" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+            <div>
+                <h2 class="font-heading text-3xl font-900 text-white mb-2">Catalogue des Fruits</h2>
+                <p class="text-slate-400 text-sm">Cliquez sur un fruit pour consulter ses statistiques et commander.</p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <div class="relative">
+                    <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="fruitSearch" placeholder="Rechercher un fruit..." class="bg-bloxCard border border-bloxBorder rounded-xl pl-11 pr-4 py-3 text-sm text-white focus:border-sky-400 outline-none w-full sm:w-64">
+                </div>
+                <select id="typeFilter" class="bg-bloxCard border border-bloxBorder rounded-xl px-4 py-3 text-sm text-white focus:border-sky-400 outline-none">
+                    <option value="all">Tous les types</option>
+                    <option value="Logia">Logia (Élémentaire)</option>
+                    <option value="Beast">Beast (Zoan)</option>
+                    <option value="Natural">Natural (Paramecia)</option>
+                </select>
+            </div>
+        </div>
+        <p id="statusMsg" class="text-center text-slate-400 text-sm hidden"></p>
+        <div id="fruitsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </section>
+
+    <!-- MODAL DÉTAILS FRUIT -->
+    <div id="fruitModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-bloxCard border border-bloxBorder rounded-3xl max-w-lg w-full p-6 sm:p-8 relative transform transition-all scale-95 opacity-0" id="modalContent">
+            <button id="closeModal" class="absolute top-6 right-6 text-red-500 hover:text-red-400 text-xl" aria-label="Fermer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="flex items-center space-x-4 mb-6">
+                <img id="modalImg" src="" alt="Fruit Icon" class="w-20 h-20 object-contain drop-shadow-lg">
+                <div>
+                    <span id="modalType" class="text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider bg-cyan-400/10 text-cyan-300 border border-cyan-400/40"></span>
+                    <h3 id="modalTitle" class="font-heading text-2xl font-900 text-white mt-1"></h3>
+                    <div id="modalPrices" class="mt-1 space-y-0.5"></div>
+                </div>
+            </div>
+            <div class="space-y-4 text-sm text-slate-300">
+                <div>
+                    <h4 class="font-bold text-white mb-1"><i class="fa-solid fa-star text-amber-400 mr-2"></i>Description</h4>
+                    <p id="modalDesc"></p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white mb-1"><i class="fa-solid fa-wand-magic-sparkles text-cyan-300 mr-2"></i>Capacités & Mutation</h4>
+                    <p id="modalAbility"></p>
+                </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-bloxBorder space-y-2">
+                <label class="text-xs text-slate-400 font-bold block"><i class="fa-brands fa-whatsapp text-lime-300 mr-1"></i>Acheter via WhatsApp :</label>
+                <div id="modalBuy" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
+            </div>
+            <div class="mt-6 flex justify-end">
+                <button id="closeModalBtn" class="px-5 py-2 rounded-xl btn-red text-xs transition-all">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <a id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Commander sur WhatsApp" class="wa-float btn-buy fixed bottom-5 right-5 z-30 w-14 h-14 rounded-full flex items-center justify-center text-3xl"><i class="fa-brands fa-whatsapp"></i></a>
+
+    <script>
+        // Les prix et numéros viennent de fruits.json (modifiable sur GitHub).
+        let fruitsData = [];
+        let contacts = [];
+
+        const fmt = n => new Intl.NumberFormat('fr-FR').format(n);
+        // Protège contre l'injection HTML si le JSON contient des caractères spéciaux
+        const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        const cleanNum = s => String(s).replace(/[^0-9]/g, '');
+        const FALLBACK_IMG = 'https://static.wikia.nocookie.net/blox-fruits/images/b/b2/Kitsune_Fruit.png';
+
+        const grid = document.getElementById('fruitsGrid');
+        const statusMsg = document.getElementById('statusMsg');
+
+        function renderContacts() {
+            const first = cleanNum(contacts[0]?.number || '');
+            document.getElementById('waFloat').href = `https://wa.me/${first}`;
+            document.getElementById('headerWa').innerHTML = contacts.map(c => `
+                <a href="https://wa.me/${cleanNum(c.number)}" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-xl bg-lime-300/10 border border-lime-300/50 hover:bg-lime-300 text-lime-300 hover:text-slate-900 text-xs font-bold transition-all flex items-center space-x-1.5">
+                    <i class="fa-brands fa-whatsapp"></i><span>${esc(c.label)}</span></a>`).join('');
+            document.getElementById('mobileWa').innerHTML = contacts.map(c => `
+                <a href="https://wa.me/${cleanNum(c.number)}" target="_blank" rel="noopener" class="block text-lime-300 font-bold text-xs">
+                    <i class="fa-brands fa-whatsapp mr-2"></i>${esc(c.label)}</a>`).join('');
+            document.getElementById('heroWa').innerHTML = contacts.map(c => `
+                <a href="https://wa.me/${cleanNum(c.number)}" target="_blank" rel="noopener" class="px-6 py-4 rounded-xl btn-buy font-semibold text-xs transition-all flex items-center justify-center space-x-2">
+                    <i class="fa-brands fa-whatsapp text-base"></i><span>${esc(c.label)}</span></a>`).join('');
+        }
+
+        function renderFruits(items) {
+            grid.innerHTML = '';
+            statusMsg.classList.toggle('hidden', items.length > 0);
+            if (!items.length) statusMsg.textContent = 'Aucun fruit trouvé.';
+            items.forEach(fruit => {
+                let badge = "bg-purple-500/10 text-purple-400 border-purple-500/30";
+                if (fruit.rarity === "Legendary") badge = "bg-amber-500/10 text-amber-400 border-amber-500/30";
+                if (fruit.rarity === "Rare") badge = "bg-cyan-400/10 text-cyan-300 border-cyan-400/40";
+                if (fruit.rarity === "Epic") badge = "bg-cyan-500/10 text-cyan-400 border-cyan-500/30";
+
+                const card = document.createElement('div');
+                card.className = "bg-bloxCard border border-bloxBorder rounded-2xl p-5 hover:border-sky-400/60 transition-all cursor-pointer group flex flex-col justify-between";
+                card.onclick = () => openModal(fruit);
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full border ${badge}">${esc(fruit.rarity)}</span>
+                            <span class="text-xs text-slate-400 font-medium">${esc(fruit.type)}</span>
+                        </div>
+                        <div class="w-full h-36 flex items-center justify-center bg-bloxDark/50 rounded-xl mb-4 group-hover:scale-105 transition-transform overflow-hidden">
+                            <img src="${esc(fruit.image)}" alt="${esc(fruit.name)}" class="max-h-28 object-contain drop-shadow-xl" onerror="this.onerror=null;this.src='${FALLBACK_IMG}'">
+                        </div>
+                        <h3 class="font-heading text-lg font-bold text-white mb-1 group-hover:text-cyan-300 transition-colors">${esc(fruit.name)}</h3>
+                        <p class="text-slate-400 text-xs line-clamp-2 mb-4">${esc(fruit.desc)}</p>
+                    </div>
+                    <div class="pt-3 border-t border-bloxBorder space-y-1">
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="text-slate-500">In-Game :</span>
+                            <span class="text-cyan-300 font-bold">${fmt(fruit.beli)} Beli</span>
+                        </div>
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="text-slate-500">Prix Réel :</span>
+                            <span class="text-lime-300 font-extrabold text-sm text-glow">${fmt(fruit.fcfa)} FCFA <span class="text-slate-400 font-normal text-xs">(${fmt(fruit.robux)} R$)</span></span>
+                        </div>
+                        <div class="mt-3 w-full py-2.5 rounded-xl btn-buy text-xs text-center flex items-center justify-center gap-2"><i class="fa-brands fa-whatsapp text-base"></i><span>Acheter maintenant</span></div>
+                    </div>`;
+                grid.appendChild(card);
+            });
+        }
+
+        const search = document.getElementById('fruitSearch');
+        const typeFilter = document.getElementById('typeFilter');
+        function filterFruits() {
+            const q = search.value.toLowerCase();
+            const t = typeFilter.value;
+            renderFruits(fruitsData.filter(f => f.name.toLowerCase().includes(q) && (t === 'all' || f.type === t)));
+        }
+        search.addEventListener('input', filterFruits);
+        typeFilter.addEventListener('change', filterFruits);
+
+        // MODAL
+        const modal = document.getElementById('fruitModal');
+        const modalContent = document.getElementById('modalContent');
+        function openModal(fruit) {
+            document.getElementById('modalImg').src = fruit.image;
+            document.getElementById('modalTitle').textContent = fruit.name;
+            document.getElementById('modalType').textContent = `${fruit.rarity} • ${fruit.type}`;
+            document.getElementById('modalPrices').innerHTML = `
+                <p class="text-cyan-300 font-bold text-sm">${fmt(fruit.beli)} Beli</p>
+                <p class="text-lime-300 font-bold text-sm">${fmt(fruit.fcfa)} FCFA (${fmt(fruit.robux)} Robux)</p>`;
+            document.getElementById('modalDesc').textContent = fruit.desc;
+            document.getElementById('modalAbility').textContent = fruit.ability || "Capacité spéciale non spécifiée.";
+            const msg = encodeURIComponent(`Bonjour, je souhaite acheter le fruit ${fruit.name} au prix de ${fmt(fruit.fcfa)} FCFA.`);
+            document.getElementById('modalBuy').innerHTML = contacts.map(c => `
+                <a href="https://wa.me/${cleanNum(c.number)}?text=${msg}" target="_blank" rel="noopener" class="px-4 py-2.5 rounded-xl btn-buy font-bold text-xs transition-all flex items-center justify-center space-x-2">
+                    <i class="fa-brands fa-whatsapp text-base"></i><span>Contact (${esc(c.short || c.label)})</span></a>`).join('');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => { modalContent.classList.remove('scale-95', 'opacity-0'); modalContent.classList.add('scale-100', 'opacity-100'); }, 10);
+        }
+        function closeModal() {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => { modal.classList.remove('flex'); modal.classList.add('hidden'); }, 200);
+        }
+        document.getElementById('closeModal').onclick = closeModal;
+        document.getElementById('closeModalBtn').onclick = closeModal;
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+        document.getElementById('menuBtn').onclick = () => document.getElementById('mobileMenu').classList.toggle('hidden');
+
+        // CHARGEMENT DES DONNÉES (cache désactivé pour voir les nouveaux prix vite)
+        async function loadData() {
+            statusMsg.textContent = 'Chargement du catalogue...';
+            statusMsg.classList.remove('hidden');
+            try {
+                const res = await fetch('fruits.json', { cache: 'no-cache' });
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const data = await res.json();
+                contacts = data.whatsapp || [];
+                fruitsData = data.fruits || [];
+                renderContacts();
+                filterFruits();
+            } catch (err) {
+                console.error(err);
+                statusMsg.textContent = "Impossible de charger le catalogue. Réessayez plus tard.";
+            }
+        }
+        loadData();
+    </script>
+</body>
+</html>
