@@ -168,7 +168,7 @@
         // Protège contre l'injection HTML si le JSON contient des caractères spéciaux
         const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
         const cleanNum = s => String(s).replace(/[^0-9]/g, '');
-        const FALLBACK_IMG = 'https://static.wikia.nocookie.net/blox-fruits/images/b/b2/Kitsune_Fruit.png';
+        const FALLBACK_IMG = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f7bff"/><stop offset="1" stop-color="#00c8ff"/></linearGradient></defs><circle cx="60" cy="64" r="38" fill="url(#g)" opacity=".9"/><path d="M60 26c0-10 8-16 16-16-1 9-6 15-16 16z" fill="#7dff8a"/><text x="60" y="78" font-size="40" text-anchor="middle" fill="#fff" font-family="Arial" font-weight="700">?</text></svg>');
 
         const grid = document.getElementById('fruitsGrid');
         const statusMsg = document.getElementById('statusMsg');
@@ -241,7 +241,7 @@
         const modal = document.getElementById('fruitModal');
         const modalContent = document.getElementById('modalContent');
         function openModal(fruit) {
-            document.getElementById('modalImg').src = fruit.image;
+            const mi = document.getElementById('modalImg'); mi.onerror = () => { mi.onerror = null; mi.src = FALLBACK_IMG; }; mi.src = fruit.image;
             document.getElementById('modalTitle').textContent = fruit.name;
             document.getElementById('modalType').textContent = `${fruit.rarity} • ${fruit.type}`;
             document.getElementById('modalPrices').innerHTML = `
